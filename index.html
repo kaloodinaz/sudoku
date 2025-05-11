@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数独オンライン - 無料で遊べる頭脳パズルゲーム</title>
+<meta name="description" content="数独オンラインは、無料で楽しめる人気の数字パズルゲームです。初心者から上級者まで、スマホやPCで手軽に数独に挑戦！頭の体操や脳トレにも最適です。">
+<link rel="canonical" href="https://kaloodinaz.github.io/sudoku/"> 
+<link rel="apple-touch-icon" sizes="180x180" href="https://kaloodinaz.github.io/sudoku/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://kaloodinaz.github.io/sudoku/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://kaloodinaz.github.io/sudoku/favicon-16x16.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Open Sans",sans-serif;line-height:1.6;background-color:#f0f0f0}
+header{background-color:#0ba360;color:#fff;text-align:center;padding:.5rem;padding-left:20px}
+header span{display:block;text-align:center;font-size:24px;font-weight:700}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+.game-container{margin:20px auto;text-align:center;max-width:800px}
+.game-frame{width:100%;max-width:800px;height:450px;border:none;background-color:#fff;box-shadow:0 2px 5px #0000001a}
+.game-info{max-width:800px;margin:20px auto;background-color:#fff;padding:20px;border-radius:5px;box-shadow:0 2px 5px #0000001a}
+.game-info h2{color:#0ba360;margin-bottom:5px;font-size:16px;font-weight:700}
+.game-info p{margin-bottom:10px}
+.game-icons{max-width:800px;margin:20px auto;text-align:center;display:flex;justify-content:space-evenly;padding:0 20px}
+.game-icons a{display:inline-block;text-decoration:none;text-align:center;flex:0 1 22%;max-width:120px}
+.game-icons img{transition:transform .2s;margin-bottom:5px}
+.game-icons .game-title{display:block;color:#666;font-size:14px;margin-top:5px;font-weight:700;min-height:40px}
+.game-icons img:hover{transform:scale(1.1)}
+footer{color:#666;text-align:center;padding:.5rem;font-size:14px;margin-top:20px}
+footer a{color:#666;text-decoration:none}
+footer a:hover{text-decoration:underline}
+.game-info ul{padding-left:20px}
+.game-info li{margin:8px 0;padding:4px 0}
+.game-title-main{text-align:center;color:#333;margin:20px 0;font-size:24px}
+#fullscreenButton{padding:15px 30px;margin:15px auto;background-color:#007bff;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:16px;display:inline-flex;align-items:center;justify-content:center;transition:background-color 0.3s,transform .2s}
+#fullscreenButton:hover{background-color:#0056b3;transform:scale(1.05)}
+#fullscreenButtonContainer{display:flex;justify-content:center;align-items:center;text-align:center}
+#fullscreenButton svg{margin-left:8px;width:20px;height:20px;fill:currentColor}
+.block{display:flex;justify-content:center;align-items:center;margin:0 auto}
+.block-300{display:none;width:100%;height:250px;background-color:#8f7a66}
+.block-728{display:none;width:100%;max-width:728px;height:90px;background-color:#8f7a66}
+@media only screen and (max-width: 738px) {
+.block-300{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;margin-bottom:10px;border-radius:10px;margin-top:10px}
+.block-728{display:none}
+}
+@media only screen and (min-width: 739px) {
+.block-728{display:flex;justify-content:center;align-items:center;margin-bottom:10px;border-radius:10px;margin-top:10px}
+.block-300{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+<span>数独オンライン</span>
+</header>
+
+<div class="container">
+<h1 class="game-title-main">数独オンラインで無料の数字パズルを楽しもう！</h1>
+<div class="game-container">
+<iframe loading="lazy" src="game.html" class="game-frame" title="数独オンラインで無料パズルを楽しもう" id="gameFrame" scrolling="no" allowfullscreen></iframe>
+<div id="fullscreenButtonContainer">
+    <button id="fullscreenButton">
+        フルスクリーン
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M7 14H5v5h5v-2H7v-3zm12-9h-5v2h3v3h2V5zm0 9h-2v3h-3v2h5v-5zM7 5h3v2H7v3H5V5h2z"/>
+      </svg>
+    </button>
+  </div>
+<p style="margin-top: 8px; font-size: 12px;color: #333;">
+  <h2>ゲームの目的</h2>
+<p>数独は、1〜9の数字を使って、各行・列・3×3のブロックに重複しないように数字を配置することが目標のパズルゲームです。</p>
+
+<h2>基本操作</h2>
+<ul>
+    <li>空いているマスをクリックして数字を入力します。</li>
+    <li>同じ行・列・ブロック内で同じ数字を使わないように注意します。</li>
+    <li>すべてのマスを正しく埋めるとクリアになります。</li>
+</ul>
+
+<h3>ヒント</h3>
+<ul>
+    <li>まずは、空きマスが少ないブロックから埋めてみましょう。</li>
+    <li>可能性が1つしかない数字から埋めていくと解きやすくなります。</li>
+    <li>詰まったときは、別の行や列から再び考えてみましょう。</li>
+</ul>
+
+<p>スマホやPCで、いつでもどこでも数独に挑戦して脳を鍛えましょう！</p>
+
+</div>
+        
+<div class="game-icons">
+<a href="https://kaloodinaz.github.io/dinosaurgame/">
+<img loading="lazy" src="https://kaloodinaz.github.io/dinosaurgame/img/dinosaurgame.png" alt="Google Chrome 恐竜ゲーム" width="80" height="80">
+<span class="game-title">恐竜ゲーム</span>
+</a>
+
+<a href="https://kaloodinaz.github.io/dinosaurgame/naruto/">
+<img loading="lazy" src="https://kaloodinaz.github.io/dinosaurgame/img/naruto-dinosaur-game.png" alt="走れ！ナルトGoogle Chrome 恐竜ゲーム" width="80" height="80">
+<span class="game-title">走れ！ナルト恐竜ゲーム</span>
+</a>
+          
+<a href="https://kaloodinaz.github.io/dinosaurgame/corona/">
+<img loading="lazy" src="https://kaloodinaz.github.io/dinosaurgame/img/corona-dinosaur-game.png" alt="走れ！コロナウイルス Google Chrome 恐竜ゲーム" width="80" height="80">
+<span class="game-title">走れ！コロナウイルス恐竜ゲーム</span>
+</a>
+<a href="https://blockbreaker2.pages.dev/">
+<img loading="lazy" src="https://kaloodinaz.github.io/dinosaurgame/img/google-block-breaker.webp" alt="Googleブロック ブレイカー" width="80" height="80">
+<span class="game-title">Googleブロック ブレイカー</span>
+</a>
+</div>
+<div class="game-info">
+  <h2>数独の基本ルール</h2>
+    <hr>
+    <div class="block block-728"><script type="text/javascript">
+     atOptions = {
+       'key' : 'd1d26e15f7c349fd8e403bb5ea491a31',
+       'format' : 'iframe',
+       'height' : 90,
+       'width' : 728,
+       'params' : {}
+     };
+   </script>
+   <script type="text/javascript" src="//www.highperformanceformat.com/d1d26e15f7c349fd8e403bb5ea491a31/invoke.js"></script></div>
+       <div class="block block-300"><script type="text/javascript">
+     atOptions = {
+       'key' : '0fee57062f9bb330edc13a4e4349876d',
+       'format' : 'iframe',
+       'height' : 250,
+       'width' : 300,
+       'params' : {}
+     };
+   </script>
+   <script type="text/javascript" src="//www.highperformanceformat.com/0fee57062f9bb330edc13a4e4349876d/invoke.js"></script></div>
+   
+
+   <p>数独は、シンプルながら論理的思考力を鍛えることができる人気の数字パズルゲームです。1〜9の数字を使い、すべての行、列、3×3ブロックに重複しないよう数字を配置するのが目的です。直感ではなく、論理的にマスを埋めていくことが求められます。</p>
+
+
+<ul>
+    <li>9×9のマス目は、9つの3×3ブロックに分かれています。</li>
+    <li>すべての行、列、ブロックに1〜9の数字を1つずつ入れます。</li>
+    <li>同じ数字は、行・列・ブロック内で重複してはいけません。</li>
+    <li>あらかじめいくつかの数字が配置されており、それをヒントに解いていきます。</li>
+    <li>すべてのマスを正しく埋めるとゲームクリアです。</li>
+</ul>
+
+<h2>数独攻略のコツ</h2>
+<ul>
+    <li>空いているマスが少ないブロックから埋めてみましょう。</li>
+    <li>1つの数字しか入らないマスを見つけることが解決の鍵です。</li>
+    <li>矛盾が生じた場合は、直前の推測を見直しましょう。</li>
+    <li>焦らず、1マスずつ確実に進めるのがポイントです。</li>
+</ul>
+
+<p>スマートフォンやパソコンで、いつでもどこでも数独を楽しみながら脳を活性化させましょう！</p>
+
+    <img loading="lazy" src="https://kaloodinaz.github.io/sudoku/sudoku-screenshot.png" alt="数独オンライン - 完全無料" style="max-width: 100%; height: auto; margin: 10px 0;">
+    
+    <h2>数独の楽しみ方</h2>
+    <p>数独は、シンプルなルールながらも論理的思考力を試される奥深いパズルゲームです。初心者でも気軽に始められ、上級者向けの難易度では高度な推理力が求められます。問題を解くごとに達成感があり、脳のトレーニングにも最適です。</p>
+    
+    <h2>Googleでの数独</h2>
+    <p>Googleでは、ブラウザ上で無料の数独ゲームを簡単に楽しむことができます。検索するだけで、アプリのダウンロードなしにすぐにプレイ可能です。直感的なインターフェースと快適な操作性で、スマートフォンやパソコンからいつでもどこでも数独を楽しめます。</p>
+    
+</div>
+</div>
+<script>
+const gameFrame = document.querySelector('.game-frame');
+window.addEventListener('load', function() {
+gameFrame.focus();
+});
+window.addEventListener('keydown', function(e) {
+if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+e.preventDefault();
+gameFrame.focus();
+}
+});
+</script>
+<script>
+    document.getElementById('fullscreenButton').addEventListener('click', function () {
+      const iframe = document.getElementById('gameFrame');
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.mozRequestFullScreen) { /* Firefox */
+        iframe.mozRequestFullScreen();
+      } else if (iframe.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) { /* IE/Edge */
+        iframe.msRequestFullscreen();
+      } else {
+        alert("お使いのブラウザはフルスクリーンモードに対応していません。");
+      }
+    });
+    </script>
+<footer>
+<p>&copy; 2025 数独オンライン - 完全無料 </p>
+<p>さあ、あなたも数独で論理の世界に挑戦して、頭をスッキリさせてみましょう！</p>
+<p><a href="https://suikagamejp.com/" target="_blank" rel="noopener">スイカゲーム</a> | <a href="https://kaloodinaz.github.io/2048-flappy/" target="_blank" rel="noopener">2048フラッピー</a></p>
+</footer>
+</body>
+</html>
